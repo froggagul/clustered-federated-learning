@@ -107,8 +107,9 @@ class Client(FederatedTrainingDevice):
         copy(target=self.W_old, source=self.W)
         self.optimizer.param_groups[0]["lr"]*=0.99
         train_stats = train_op(self.model, self.train_loader if not loader else loader, self.optimizer, epochs)
+        # self.dw - self.w - self.w_old
         subtract_(target=self.dW, minuend=self.W, subtrahend=self.W_old)
-        return train_stats  
+        return train_stats
 
     def reset(self): 
         copy(target=self.W, source=self.W_old)
