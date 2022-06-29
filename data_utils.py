@@ -30,7 +30,7 @@ class CustomSubset(Subset):
         self.subset_transform = subset_transform
         
     def __getitem__(self, idx):
-        x, y = self.dataset[self.indices[idx]]
+        x, y = self.dataset[self.indices[idx]][:2]
         
         if self.subset_transform:
             x = self.subset_transform(x)
